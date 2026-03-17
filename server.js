@@ -22,14 +22,14 @@ const swaggerSpec = swaggerJsdoc(swaggerOptions);
 app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.get("/", (req, res) => {
-  res.redirect("/api/swagger");
+  res.redirect("/swagger");
 });
 
 app.use("/login", loginRouter);
 app.use("/register", registerRouter);
 
 app.use((req, res, next) => {
-  if (req.path.startsWith("/swagger") || req.path.startsWith("/api/swagger") || req.path.startsWith("/login") || req.path.startsWith("/api/login") || req.path.startsWith("/register") || req.path.startsWith("/api/register") || req.path === "/favicon.ico") {
+  if (req.path.startsWith("/swagger") || req.path.startsWith("/login")  || req.path.startsWith("/register") || req.path === "/favicon.ico") {
     return next();
   }
   validateSession(req, res, next);

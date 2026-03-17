@@ -11,7 +11,7 @@ const swaggerOptions = {
         url: "http://localhost:3000",
       },
       {
-        url: "https://srisainilayam.vercel.app/api",
+        url: "https://apartments-89bk.onrender.com",
       },
     ],
     components: {
