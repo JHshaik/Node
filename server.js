@@ -19,15 +19,14 @@ app.use(express.json());
 
 
 const swaggerSpec = swaggerJsdoc(swaggerOptions);
-app.use(["/swagger", "/api/swagger"], swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.get("/", (req, res) => {
-  const redirectPath = process.env.VERCEL ? "/api/swagger" : "/swagger";
-  res.redirect(redirectPath);
+  res.redirect("/api/swagger");
 });
 
-app.use(["/login", "/api/login"], loginRouter);
-app.use(["/register", "/api/register"], registerRouter);
+app.use("/login", loginRouter);
+app.use("/register", registerRouter);
 
 app.use((req, res, next) => {
   if (req.path.startsWith("/swagger") || req.path.startsWith("/api/swagger") || req.path.startsWith("/login") || req.path.startsWith("/api/login") || req.path.startsWith("/register") || req.path.startsWith("/api/register") || req.path === "/favicon.ico") {
@@ -36,16 +35,10 @@ app.use((req, res, next) => {
   validateSession(req, res, next);
 });
 
-app.use(["/users", "/api/users"], usersRouter);
-app.use(["/apartments", "/api/apartments"], apartmentsRouter);
-app.use(["/announcements", "/api/announcements"], announcementsRouter);
-app.use(["/requests", "/api/requests"], requestsRouter);
+app.use("/users", usersRouter);
+app.use("/apartments", apartmentsRouter);
+app.use("/announcements", announcementsRouter);
+app.use("/requests", requestsRouter);
 
-const PORT = process.env.PORT || 3000;
-if (!process.env.VERCEL) {
-  app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
-  });
-}
 
 export default app;
