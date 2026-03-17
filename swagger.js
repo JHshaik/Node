@@ -1,3 +1,4 @@
+import swaggerJsdoc from "swagger-jsdoc";
 const swaggerOptions = {
   definition: {
     openapi: "3.0.0",
@@ -11,7 +12,7 @@ const swaggerOptions = {
         url: "http://localhost:3000",
       },
       {
-        url: "https://srisainilayam.vercel.app",
+        url: "https://srisainilayam.vercel.app/api",
       },
     ],
     components: {
@@ -27,5 +28,5 @@ const swaggerOptions = {
   },
   apis: ["./routes/*.js"],
 };
-
+const swaggerSpec = swaggerJsdoc(swaggerOptions);
 export default swaggerOptions;

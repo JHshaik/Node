@@ -16,16 +16,21 @@ dotenv.config();
 const app = express();
 app.use(cors());
 app.use(express.json());
+
 const swaggerSpec = swaggerJsdoc(swaggerOptions);
 app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use("/login", loginRouter);
 app.use("/register", registerRouter);
-app.use(validateSession);
-app.use("/users", usersRouter);
-app.use("/apartments", apartmentsRouter);
-app.use("/announcements", announcementsRouter);
-app.use("/requests", requestsRouter);
+
+app.use("/api", validateSession);
+
+app.use("/api/users", usersRouter);
+app.use("/api/apartments", apartmentsRouter);
+app.use("/api/announcements", announcementsRouter);
+app.use("/api/requests", requestsRouter);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT);
+
+export default app;
