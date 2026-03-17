@@ -20,7 +20,6 @@ const swaggerOptions = {
           type: "http",
           scheme: "bearer",
           bearerFormat: "JWT",
-          description: "Enter session token as 'Bearer <sessionId>'",
         },
       },
     },
