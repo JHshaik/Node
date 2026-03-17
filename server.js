@@ -18,7 +18,7 @@ app.use(cors());
 app.use(express.json());
 
 const swaggerSpec = swaggerJsdoc(swaggerOptions);
-app.use("/api/swagger", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use("/login", loginRouter);
 app.use("/register", registerRouter);
@@ -28,10 +28,10 @@ app.use("/api", (req, res, next) => {
     validateSession(req, res, next);
 })
 
-app.use("/api/users", usersRouter);
-app.use("/api/apartments", apartmentsRouter);
-app.use("/api/announcements", announcementsRouter);
-app.use("/api/requests", requestsRouter);
+app.use("/users", usersRouter);
+app.use("/apartments", apartmentsRouter);
+app.use("/announcements", announcementsRouter);
+app.use("/requests", requestsRouter);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT);
