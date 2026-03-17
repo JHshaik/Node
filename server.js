@@ -19,7 +19,7 @@ app.use(express.json());
 
 
 const swaggerSpec = swaggerJsdoc(swaggerOptions);
-app.use(["/swagger", "/api/swagger"], swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.get("/", (req, res) => {
   res.redirect("/swagger");
@@ -29,7 +29,7 @@ app.use(["/login", "/api/login"], loginRouter);
 app.use(["/register", "/api/register"], registerRouter);
 
 app.use((req, res, next) => {
-  if (req.path.startsWith("/swagger") || req.path.startsWith("/api/swagger") || req.path.startsWith("/login") || req.path.startsWith("/api/login") || req.path.startsWith("/register") || req.path.startsWith("/api/register") || req.path === "/favicon.ico") {
+  if (req.path.startsWith("/swagger") || req.path.startsWith("/login") || req.path.startsWith("/register") || req.path === "/favicon.ico") {
     return next();
   }
   validateSession(req, res, next);
