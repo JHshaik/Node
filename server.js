@@ -17,8 +17,13 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+
 const swaggerSpec = swaggerJsdoc(swaggerOptions);
 app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+app.get("/", (req, res) => {
+  res.redirect("/swagger");
+});
 
 app.use("/login", loginRouter);
 app.use("/register", registerRouter);
