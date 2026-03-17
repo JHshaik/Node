@@ -40,5 +40,10 @@ app.use("/apartments", apartmentsRouter);
 app.use("/announcements", announcementsRouter);
 app.use("/requests", requestsRouter);
 
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
+});
+
 
 export default app;
