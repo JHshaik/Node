@@ -18,7 +18,7 @@ app.use(cors());
 app.use(express.json());
 
 const swaggerSpec = swaggerJsdoc(swaggerOptions);
-app.use("./api/swagger", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use("/api/swagger", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use("/login", loginRouter);
 app.use("/register", registerRouter);
