@@ -18,12 +18,15 @@ app.use(cors());
 app.use(express.json());
 
 const swaggerSpec = swaggerJsdoc(swaggerOptions);
-app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use("./api/swagger", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use("/login", loginRouter);
 app.use("/register", registerRouter);
 
-app.use("/api", validateSession);
+app.use("/api", (req, res, next) => {
+    if (req.path.startsWith("/swagger")) return next();
+    validateSession(req, res, next);
+})
 
 app.use("/api/users", usersRouter);
 app.use("/api/apartments", apartmentsRouter);
