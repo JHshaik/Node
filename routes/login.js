@@ -2,6 +2,30 @@ import express from "express";
 import { pool } from "../db.js";
 import { v4 as uuidv4 } from "uuid";
 
+/**
+ * @openapi
+ * /login:
+ *   post:
+ *     tags:
+ *       - Auth
+ *     summary: Login user
+ *     security: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Login successful
+ */
+
 const router = express.Router();
 
 router.post("/", async (req, res) => {

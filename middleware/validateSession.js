@@ -8,7 +8,12 @@ const validateSession = async (req, res, next) => {
             return res.status(401).json({ message: "Session ID is required" });
         }
 
-        const [session] = await pool.query("SELECT * FROM sessions WHERE sessionId = ?", [authHeader]);
+        const token = authHeader.startsWith("Bearer ") ? authHeader.split(" ")[1] : authHeader;
+        if (!token) {
+            return res.status(401).json({ message: "Session ID is required" });
+        }
+
+        const [session] = await pool.query("SELECT * FROM sessions WHERE sessionId = ?", [token]);
 
         if (session.length === 0) {
             return res.status(401).json({ message: "Invalid or expired session ID" });

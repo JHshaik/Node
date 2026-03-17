@@ -1,6 +1,84 @@
 import express from "express";
 import { pool } from "../db.js";
 
+/**
+ * @openapi
+ * /users:
+ *   get:
+ *     tags:
+ *       - Users
+ *     summary: Get all users
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: List of users
+ *   post:
+ *     tags:
+ *       - Users
+ *     summary: Create a new user
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               full_name:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *             required:
+ *               - full_name
+ *               - email
+ *     responses:
+ *       201:
+ *         description: User created
+ */
+
+/**
+ * @openapi
+ * /users/{id}:
+ *   put:
+ *     tags:
+ *       - Users
+ *     summary: Update user by ID
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *     responses:
+ *       200:
+ *         description: User updated
+ *   delete:
+ *     tags:
+ *       - Users
+ *     summary: Delete user by ID
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: User deleted
+ */
+
 const router = express.Router();
 
 router.get("/", async (req, res) => {

@@ -1,6 +1,40 @@
 import express from "express";
 import { pool } from "../db.js";
 
+/**
+ * @openapi
+ * /requests:
+ *   get:
+ *     tags:
+ *       - Requests
+ *     summary: Get all requests
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: List of requests
+ */
+
+/**
+ * @openapi
+ * /requests/{id}:
+ *   delete:
+ *     tags:
+ *       - Requests
+ *     summary: Delete request
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Deleted
+ */
+
 const router = express.Router();
 
 router.get("/", async (req, res) => {
