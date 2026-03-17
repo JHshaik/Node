@@ -22,16 +22,16 @@ const swaggerSpec = swaggerJsdoc(swaggerOptions);
 app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.get("/", (req, res) => {
-  res.redirect("/swagger");
+  res.redirect("/api/swagger");
 });
 
 app.use("/login", loginRouter);
 app.use("/register", registerRouter);
 
-app.use("/api", (req, res, next) => {
-    if (req.path.startsWith("/swagger")) return next();
-    validateSession(req, res, next);
-})
+app.use((req, res, next) => {
+  if (req.path.startsWith("/swagger")) return next();
+  validateSession(req, res, next);
+});
 
 app.use("/users", usersRouter);
 app.use("/apartments", apartmentsRouter);
