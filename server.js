@@ -22,7 +22,7 @@ const swaggerSpec = swaggerJsdoc(swaggerOptions);
 app.use(["/swagger", "/api/swagger"], swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.get("/", (req, res) => {
-  res.redirect("/api/swagger");
+  res.redirect("/swagger");
 });
 
 app.use(["/login", "/api/login"], loginRouter);
@@ -40,7 +40,11 @@ app.use(["/apartments", "/api/apartments"], apartmentsRouter);
 app.use(["/announcements", "/api/announcements"], announcementsRouter);
 app.use(["/requests", "/api/requests"], requestsRouter);
 
-// const PORT = process.env.PORT || 3000;
-// app.listen(PORT);
+const PORT = process.env.PORT || 3000;
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+  });
+}
 
 export default app;
