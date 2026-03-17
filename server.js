@@ -29,7 +29,10 @@ app.use("/login", loginRouter);
 app.use("/register", registerRouter);
 
 app.use((req, res, next) => {
-  if (req.path.startsWith("/swagger")) return next();
+  const path = req.path.toLowerCase();
+  if (path.startsWith("/swagger") || path === "/favicon.ico") {
+    return next();
+  }
   validateSession(req, res, next);
 });
 
