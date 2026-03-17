@@ -29,8 +29,7 @@ app.use("/login", loginRouter);
 app.use("/register", registerRouter);
 
 app.use((req, res, next) => {
-  const path = req.path.toLowerCase();
-  if (path.startsWith("/swagger") || path === "/favicon.ico") {
+  if (req.path.startsWith("/swagger") || req.path.startsWith("/login") || req.path.startsWith("/register") || req.path === "/favicon.ico") {
     return next();
   }
   validateSession(req, res, next);
@@ -43,5 +42,3 @@ app.use("/requests", requestsRouter);
 
 // const PORT = process.env.PORT || 3000;
 // app.listen(PORT);
-
-export default app;
