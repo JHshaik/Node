@@ -1,6 +1,78 @@
 import express from "express";
 import { pool } from "../db.js";
 
+/**
+ * @openapi
+ * /apartments:
+ *   get:
+ *     tags:
+ *       - Apartments
+ *     summary: Get all apartments
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: List of apartments
+ *   post:
+ *     tags:
+ *       - Apartments
+ *     summary: Create apartment
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               building_name:
+ *                 type: string
+ *               resident_id:
+ *                 type: integer
+ *             required:
+ *               - building_name
+ *               - resident_id
+ *     responses:
+ *       201:
+ *         description: Apartment created
+ */
+
+/**
+ * @openapi
+ * /apartments/{id}:
+ *   put:
+ *     tags:
+ *       - Apartments
+ *     summary: Update apartment
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Updated
+ *   delete:
+ *     tags:
+ *       - Apartments
+ *     summary: Delete apartment
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Deleted
+ */
+
 const router = express.Router();
 
 router.get("/", async (req, res) => {

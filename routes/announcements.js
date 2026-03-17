@@ -1,6 +1,73 @@
 import express from "express";
 import { pool } from "../db.js";
 
+/**
+ * @openapi
+ * /announcements:
+ *   get:
+ *     tags:
+ *       - Announcements
+ *     summary: Get all announcements
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: List of announcements
+ *   post:
+ *     tags:
+ *       - Announcements
+ *     summary: Create announcement
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               title:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: Announcement created
+ */
+
+/**
+ * @openapi
+ * /announcements/{id}:
+ *   put:
+ *     tags:
+ *       - Announcements
+ *     summary: Update announcement
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Updated
+ *   delete:
+ *     tags:
+ *       - Announcements
+ *     summary: Delete announcement
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Deleted
+ */
+
 const router = express.Router();
 
 

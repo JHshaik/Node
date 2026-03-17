@@ -1,6 +1,32 @@
 import express from "express";
 import { pool } from "../db.js";
 
+/**
+ * @openapi
+ * /register:
+ *   post:
+ *     tags:
+ *       - Auth
+ *     summary: Register new user
+ *     security: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               full_name:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: Registered
+ */
+
 const router = express.Router();
 router.post("/", async (req, res) => {
     try {

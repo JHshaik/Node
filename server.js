@@ -8,11 +8,16 @@ import requestsRouter from "./routes/requests.js";
 import loginRouter from "./routes/login.js";
 import validateSession from "./middleware/validateSession.js";
 import registerRouter from "./routes/register.js";
+import swaggerUi from "swagger-ui-express";
+import swaggerOptions from "./swagger.js";
+import swaggerJsdoc from "swagger-jsdoc";
 
 dotenv.config();
 const app = express();
 app.use(cors());
 app.use(express.json());
+const swaggerSpec = swaggerJsdoc(swaggerOptions);
+app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use("/login", loginRouter);
 app.use("/register", registerRouter);
